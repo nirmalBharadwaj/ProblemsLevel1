@@ -61,12 +61,31 @@ public class Solution {
      *     int data;
      *     SinglyLinkedListNode next;
      * }
-     *
+     * Time complexity -- O(n) ,Space -- O(n)
      */
     static SinglyLinkedListNode reverse(SinglyLinkedListNode head) {
 
+        SinglyLinkedListNode pointer = head;
+        Stack<Integer> st = new Stack<Integer>();
 
+        while (pointer.next != null){
+            st.push(pointer.data);
+            pointer = pointer.next;
+        }
+        // last element
+        st.push(pointer.data);
 
+        //new linked list
+        SinglyLinkedList llist = new SinglyLinkedList();
+        llist.head = pointer;
+
+        head = new SinglyLinkedListNode(st.pop());
+        pointer = head;
+
+       while (!st.isEmpty()){
+           pointer.next = new SinglyLinkedListNode(st.pop());
+           pointer = pointer.next;
+       }
         return head;
 
     }
